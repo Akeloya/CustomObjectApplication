@@ -1,7 +1,7 @@
 ﻿/*
  *  "Custom object application core"
  *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
+ *  Copyright (C) 2018 by Maxim V. Yugov.
  *
  *  This file is part of "Custom object application".
  *
@@ -25,11 +25,29 @@ namespace CoaApp.Core.Enumes
     /// </summary>
     public enum CoaScriptTypes
     {
+        /// <summary>
+        /// Definition code
+        /// </summary>
         Include,
+        /// <summary>
+        /// Normal code for executing in folder
+        /// </summary>
         Normal,
-        DataFilter,
+        /// <summary>
+        /// Code for filters
+        /// </summary>
+        Filter,
+        /// <summary>
+        /// Code for automatic calculations
+        /// </summary>
         Autocalculation,
+        /// <summary>
+        /// Code for executing in scheduled tascks
+        /// </summary>
         ScheduledTask,
+        /// <summary>
+        /// Code for executin on forms
+        /// </summary>
         Form
     }
 }

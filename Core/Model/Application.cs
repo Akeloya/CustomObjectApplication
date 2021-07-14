@@ -1,7 +1,7 @@
 ﻿/*
  *  "Custom object application core"
  *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
+ *  Copyright (C) 2018 by Maxim V. Yugov.
  *
  *  This file is part of "Custom object application".
  *
@@ -22,22 +22,24 @@ using CoaApp.Core.Enumes;
 using CoaApp.Core.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace CoaApp.Core
 {
     /// <summary>
     /// Application instance
     /// </summary>
-    public abstract class Application : MarshalByRefObject, IApplication
+    public abstract class CoaApplication : MarshalByRefObject, IApplication
     {
+        [ThreadStatic] private static ISession _activeSession;
+        public ISession ActiveSession => _activeSession;
         /// <summary>
         /// Internal application folders
         /// </summary>
         /// <returns></returns>
         public static List<CoaApplicationFolders> GetApplicationFolders()
         {
-            List<CoaApplicationFolders> result = new List<CoaApplicationFolders> {
+            List<CoaApplicationFolders> result = new()
+            {
                 CoaApplicationFolders.UserAccounts,
                 CoaApplicationFolders.UserGroups
             };
@@ -50,7 +52,7 @@ namespace CoaApp.Core
         /// <returns></returns>
         public static Dictionary<CoaApplicationFoldersProperties, bool> GetAllowedFielsByAppFolderType(CoaApplicationFolders type)
         {
-            Dictionary<CoaApplicationFoldersProperties, bool> result = new Dictionary<CoaApplicationFoldersProperties, bool>();
+            Dictionary<CoaApplicationFoldersProperties, bool> result = new();
             switch (type)
             {
                 case CoaApplicationFolders.UserAccounts:
@@ -82,8 +84,7 @@ namespace CoaApp.Core
             return result;
         }
 
-        [ThreadStatic]private static Session _activeSession;
-        public Session ActiveSession => _activeSession;
+        
         public ISession OpenSession(string hostName, int port, string userName = null, string password = null)
         {
             if (string.IsNullOrEmpty(hostName))
@@ -124,10 +125,7 @@ namespace CoaApp.Core
         /// <param name="host">Host name</param>
         /// <param name="port">Port number</param>
         /// <returns></returns>
-        protected virtual Session OnOpenSession(string host, int port)
-        {
-            throw new NotImplementedException();
-        }
+        protected abstract ISession OnOpenSession(string host, int port);
 
         /// <summary>
         /// Realization of opening session method by using internal auth
@@ -137,17 +135,11 @@ namespace CoaApp.Core
         /// <param name="login">User login name</param>
         /// <param name="password">User password string</param>
         /// <returns></returns>
-        protected virtual Session OnOpenSessionWithLoginPassword(string host, int port, string login, string password)
-        {
-            throw new NotImplementedException();
-        }
+        protected abstract ISession OnOpenSessionWithLoginPassword(string host, int port, string login, string password);
         /// <summary>
         /// Realization of logging message
         /// </summary>
         /// <param name="message"></param>
-        protected virtual void OnLogMessage(string message)
-        {
-            throw new NotImplementedException();
-        }
+        protected abstract void OnLogMessage(string message);        
     }
 }

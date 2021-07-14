@@ -1,7 +1,7 @@
 ﻿/*
  *  "Custom object application core"
  *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
+ *  Copyright (C) 2018 by Maxim V. Yugov.
  *
  *  This file is part of "Custom object application".
  *
@@ -20,8 +20,18 @@
  */
 namespace CoaApp.Core.Interfaces
 {
+    /// <summary>
+    /// Basic application interface
+    /// </summary>
     public interface IBase
     {
+        /// <summary>
+        /// Current application reference
+        /// </summary>
         IApplication Application { get; }
+        /// <summary>
+        /// Reference to parent object or object-creator
+        /// </summary>
+        object Parent { get; }
     }
 }

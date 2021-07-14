@@ -1,7 +1,7 @@
 ﻿/*
  *  "Custom object application core"
  *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
+ *  Copyright (C) 2018 by Maxim V. Yugov.
  *
  *  This file is part of "Custom object application".
  *
@@ -18,20 +18,19 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-using CoaApp.Core.Interfaces;
 
 namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Коллекция пользователей приложения
+    /// Application user collection
     /// </summary>
     public interface IUsers : IBaseCollection<IUser>
     {
         /// <summary>
-        /// Получить существующего пользователя по логину
+        /// Get user by login name
         /// </summary>
-        /// <param name="login">Логин пользователя</param>
-        /// <returns>Объект IUser</returns>
+        /// <param name="login">User login name</param>
+        /// <returns>Object IUser</returns>
         IUser GetUserByLoginName(string login);        
     }
 }

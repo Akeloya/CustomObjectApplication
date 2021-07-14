@@ -1,7 +1,7 @@
 ﻿/*
  *  "Custom object application core"
  *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
+ *  Copyright (C) 2018 by Maxim V. Yugov.
  *
  *  This file is part of "Custom object application".
  *
@@ -26,8 +26,17 @@ namespace CoaApp.Core.Enumes
     /// </summary>
     public enum CoaImportDataTypes
     {
+        /// <summary>
+        /// From SQL database
+        /// </summary>
         Sql,
+        /// <summary>
+        /// From CSV file
+        /// </summary>
         Csv,
+        /// <summary>
+        /// From XML File
+        /// </summary>
         Xml
     }
 }

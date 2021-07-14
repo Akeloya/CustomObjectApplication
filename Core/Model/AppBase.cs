@@ -1,7 +1,7 @@
 ﻿/*
  *  "Custom object application core"
- *  An application that implements the ability to customize object templates and actions on them.
- *  Copyright (C) 2019 by Maxim V. Yugov.
+ *  Application for creating and using freely customizable configuration of data, forms, actions and other things
+ *  Copyright (C) 2018 by Maxim V. Yugov.
  *
  *  This file is part of "Custom object application".
  *
@@ -23,14 +23,22 @@ using System;
 
 namespace CoaApp.Core
 {
-    public abstract class AppBase<T> : MarshalByRefObject, IBase
+    /// <summary>
+    /// Application base class
+    /// </summary>
+    public abstract class AppBase : MarshalByRefObject, IBase
     {
-        public AppBase(Application app, T parent)
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="parent"></param>
+        protected AppBase(IApplication app, object parent)
         {
             Application = app;
             Parent = parent;
         }
-
+#pragma warning disable CS0672
         /// <summary>
         /// Never dismount in domains
         /// </summary>
@@ -39,10 +47,10 @@ namespace CoaApp.Core
         {
             return null;
         }
-        public Application Application { get; }
-
-        public T Parent { get; }
-
-        IApplication IBase.Application => Application;
+#pragma warning restore CS0672
+        ///<inheritdoc/>
+        public IApplication Application { get; }
+        ///<inheritdoc/>
+        public object Parent { get; }
     }
 }

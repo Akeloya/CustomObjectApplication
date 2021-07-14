@@ -1,7 +1,7 @@
 ﻿/*
  *  "Custom object application core"
  *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
+ *  Copyright (C) 2018 by Maxim V. Yugov.
  *
  *  This file is part of "Custom object application".
  *
@@ -22,43 +22,40 @@ using CoaApp.Core.Interfaces;
 
 namespace CoaApp.Core
 {
-    public abstract class UserFields<T> : AppBase<T>, IUserFields
+    ///<inheritdoc/>
+    public abstract class UserFields : AppBase, IUserFields
     {
-        protected UserFields(Application app, T parent) : base(app, parent)
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="parent"></param>
+        protected UserFields(IApplication app, object parent) : base(app, parent)
         {
 
         }
-
+        ///<inheritdoc/>
         public IUserField this[int idx] => OnGetFieldByIndex(idx);
-
+        ///<inheritdoc/>
         public IUserField this[string alias] => OnGetFieldByAlias(alias);
-
+        ///<inheritdoc/>
         public int Count => OnGetCount();
         /// <summary>
         /// Get User fields count
         /// </summary>
         /// <returns></returns>
-        protected virtual int OnGetCount()
-        {
-            return 0;
-        }
+        protected abstract int OnGetCount();        
         /// <summary>
         /// Get User field by index
         /// </summary>
         /// <param name="idx"></param>
         /// <returns></returns>
-        protected virtual IUserField OnGetFieldByIndex(int idx)
-        {
-            return null;
-        }
+        protected abstract IUserField OnGetFieldByIndex(int idx);
         /// <summary>
         /// Get User field by alias
         /// </summary>
         /// <param name="alias"></param>
         /// <returns></returns>
-        protected virtual IUserField OnGetFieldByAlias(string alias)
-        {
-            return null;
-        }
+        protected abstract IUserField OnGetFieldByAlias(string alias);
     }
 }

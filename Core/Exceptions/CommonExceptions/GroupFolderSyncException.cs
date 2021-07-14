@@ -1,7 +1,7 @@
 ﻿/*
  *  "Custom object application core"
  *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
+ *  Copyright (C) 2018 by Maxim V. Yugov.
  *
  *  This file is part of "Custom object application".
  *
@@ -18,28 +18,36 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-namespace CoaApp.Core.Interfaces
+using CoaApp.Core.Properties;
+using System;
+
+namespace CoaApp.Core.Exceptions
 {
     /// <summary>
-    /// Определение именованного правила
+    /// Exception throwns when user folder and app folder has breked link or link is missing
     /// </summary>
-    public interface INamedFilterDefinition : IBase
+    [Serializable]
+    public class GroupFolderSyncException : CoaApplicationException
     {
         /// <summary>
-        /// Описание фильтра
+        /// Constructor for overriding message
         /// </summary>
-        string Description { get; set; }
+        /// <param name="message"></param>
+        public GroupFolderSyncException(string message) : base(message, AppExceptionStatus.Work)
+        {
+        }
         /// <summary>
-        /// Фильтр
+        /// Constructor for define standard exception with inner exception
         /// </summary>
-        IFilter Filter { get; }
+        /// <param name="innerException">Additional exception</param>
+        public GroupFolderSyncException(Exception innerException) : base(Resource.GroupSyncRequestException, innerException, AppExceptionStatus.Work)
+        {
+        }
         /// <summary>
-        /// Имя фильтра
+        /// Default constructor
         /// </summary>
-        string Name { get; set; }        
-        /// <summary>
-        /// Общий фильтр или личный
-        /// </summary>
-        bool Public { get; set; }
+        public GroupFolderSyncException() : base(Resource.GroupFolderSyncException, AppExceptionStatus.Work)
+        {
+        }
     }
 }

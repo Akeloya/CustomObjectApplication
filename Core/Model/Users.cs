@@ -1,7 +1,7 @@
 ﻿/*
  *  "Custom object application core"
  *  An application that implements the ability to customize object templates and actions on them.
- *  Copyright (C) 2019 by Maxim V. Yugov.
+ *  Copyright (C) 2018 by Maxim V. Yugov.
  *
  *  This file is part of "Custom object application".
  *
@@ -23,36 +23,31 @@ using System;
 
 namespace CoaApp.Core
 {
-    public abstract class Users<T> : AppBase<T>, IUsers
+    ///<inheritdoc/>
+    public abstract class Users : AppBase, IUsers
     {
-        protected Users(Application app, T parent) : base(app, parent)
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="parent"></param>
+        protected Users(IApplication app, object parent) : base(app, parent)
         {
 
         }
-        public IUser this[int index] => throw new NotImplementedException();
-
-        public IUser this[string name] => throw new NotImplementedException();
-
+        ///<inheritdoc/>
+        public abstract IUser this[int index] { get; }
+        ///<inheritdoc/>
+        public abstract IUser this[string name] { get; }
+        ///<inheritdoc/>
         public int Count => throw new NotImplementedException();
-
-        public IUser Add()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IUser GetUserByLoginName(string login)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(IUser obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(int index)
-        {
-            throw new NotImplementedException();
-        }
-    }
+        ///<inheritdoc/>
+        public abstract IUser Add();
+        ///<inheritdoc/>
+        public abstract IUser GetUserByLoginName(string login);
+        ///<inheritdoc/>
+        public abstract void Remove(IUser obj);
+        ///<inheritdoc/>
+        public abstract void Remove(int index);
+     }
 }

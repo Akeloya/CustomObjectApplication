@@ -1,7 +1,7 @@
 ﻿/*
  *  "Custom object application core"
  *  Application for creating and using freely customizable configuration of data, forms, actions and other things
- *  Copyright (C) 2020 by Maxim V. Yugov.
+ *  Copyright (C) 2018 by Maxim V. Yugov.
  *
  *  This file is part of "Custom object application".
  *
@@ -23,28 +23,28 @@ using System.ComponentModel;
 namespace CoaApp.Core.Interfaces
 {
     /// <summary>
-    /// Пользовательское поле объекта
+    /// Object user field
     /// </summary>
     public interface IUserField : IBase, IDataErrorInfo, INotifyPropertyChanged
     {
         /// <summary>
-        /// Значение поля
+        /// Field value
         /// </summary>
         dynamic TValue { get; set; }
         /// <summary>
-        /// Определение
+        /// Field definition
         /// </summary>
         IUserFieldDefinition Definition { get; }
         /// <summary>
-        /// Флаг отсутствия значения
+        /// Is value null flag
         /// </summary>
         bool IsNull { get; }
         /// <summary>
-        /// Доступность поля для редактирования
+        /// Field avaliability for editing
         /// </summary>
         bool IsEnabled { get; }
         /// <summary>
-        /// Требуется ли заполнить поле
+        /// Field mandatory for value
         /// </summary>
         bool IsRequired { get; }
     }
